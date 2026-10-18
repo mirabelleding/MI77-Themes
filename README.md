@@ -1,10 +1,11 @@
 # VS Code Color Settings
 
 ## Preview
-**MI77_palette_000**
+**MI77_palette_000** </br>
+<img src="pics/palette_000.png" width="300">
 
-<img src="pics/palette_0.png" width="400">
-
+**MI77_palette_001** </br>
+<img src="pics/palette_001.png" width="300">
 ## Setup
 
 ```text
