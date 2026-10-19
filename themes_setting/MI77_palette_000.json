@@ -1,4 +1,6 @@
 {
+    "workbench.colorTheme": "MI77_palette_000",
+
     "workbench.colorCustomizations": {
         "editor.background": "#1a1a1a",
         "sideBar.background": "#1a1a1a",
@@ -15,40 +17,42 @@
         "editor.selectionBackground": "#343842",
         "editor.lineHighlightBackground": "#191C21"
     },
-
+    
     "editor.semanticHighlighting.enabled": true,
-
     "editor.semanticTokenColorCustomizations": {
         "enabled": true,
         "rules": {
-            "namespace": "#0acaa7",
+            "namespace": "#c3a5ff",
 
-            "class": "#ea9b69",
+            "class.typeHint:python": "#98eae2",
+
+            "class": "#fca875",
             "type": "#E5C07B",
             "typeParameter": "#E5C07B",
 
-            "function": "#B49AE8",
-            "member": "#B49AE8",
-            "property": "#B49AE8",
+            "function": "#c3a5ff",
+            "member": "#c3a5ff",
+            "property": "#c3a5ff",
 
-            "parameter": "#C8A7F0",
-            "selfParameter": "#C8A7F0",
-            "clsParameter": "#C8A7F0",
+            "parameter": "#fbdef3",
+            "selfParameter": "#ffb98e",
+            "clsParameter": "#fbdef3",
 
-            "variable": "#62dff8",
+            "variable": "#ffe5f8",
+            "variable.readonly": "#7aafff",
 
-            "keyword": "#D8A0C4",
-            "operator": "#D8A0C4",
+            "*.decorator": "#94bfff",
 
-            "string": "#45cf9f",
+            "keyword": "#F0A6CA",
+            "operator": "#FAF9FA",
+
+            "string": "#E8E1AADB",
             "number": "#F0A6CA",
 
             "comment": {
                 "foreground": "#777777",
-                "italic": true
-            },
-
-            "*.decorator:python": "#73a6f2"
+                "italic": false
+            }
         }
     },
 
@@ -74,7 +78,7 @@
                     "string.quoted.docstring"
                 ],
                 "settings": {
-                    "foreground": "#e8e1aa"
+                    "foreground": "#e4deaf"
                 }
             },
             {
@@ -82,17 +86,19 @@
                 "scope": [
                     "keyword",
                     "storage.type",
-                    "storage.modifier"
+                    "storage.modifier",
+                    "keyword.control",
+                    "keyword.other"
                 ],
                 "settings": {
-                    "foreground": "#D8A0C4"
+                    "foreground": "#F0A6CA"
                 }
             },
             {
                 "name": "Numbers",
                 "scope": "constant.numeric",
                 "settings": {
-                    "foreground": "#cb90cce0"
+                    "foreground": "#F0A6CA"
                 }
             },
             {
@@ -102,17 +108,28 @@
                     "support.type.python"
                 ],
                 "settings": {
-                    "foreground": "#7FDBCA"
+                    "foreground": "#81D8D0"
                 }
             },
             {
                 "name": "Decorator @",
                 "scope": [
                     "punctuation.definition.decorator.python",
-                    "meta.function.decorator.python punctuation.definition.decorator.python"
+                    "meta.function.decorator.python",
+                    "punctuation.definition.decorator.python"
                 ],
                 "settings": {
-                    "foreground": "#73a6f2"
+                    "foreground": "#94bfff"
+                }
+            },
+            {
+                "name": "Function calls",
+                "scope": [
+                    "meta.function-call.python",
+                    "entity.name.function.python"
+                ],
+                "settings": {
+                    "foreground": "#c0a4fa"
                 }
             }
         ]

@@ -2,10 +2,7 @@
 
 ## Preview
 **MI77_palette_000** </br>
-<img src="pics/palette_000.png" width="300">
-
-**MI77_palette_001** </br>
-<img src="pics/palette_001.png" width="300">
+<img src="pics/palette_000.png" width="350">
 ## Setup
 
 ```text
