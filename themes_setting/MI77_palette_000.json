@@ -104,7 +104,6 @@
             {
                 "name": "Builtins",
                 "scope": [
-                    "support.function.builtin",
                     "support.type.python"
                 ],
                 "settings": {
@@ -125,6 +124,7 @@
             {
                 "name": "Function calls",
                 "scope": [
+                    "support.function.builtin",
                     "meta.function-call.python",
                     "entity.name.function.python"
                 ],
