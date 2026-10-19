@@ -1,5 +1,7 @@
 {
-    "workbench.colorTheme": "MI77_palette_000",
+    "editor.minimap.enabled": false,
+    "python.defaultInterpreterPath": "/usr/local/bin/python3.10",
+    "security.workspace.trust.untrustedFiles": "open",
 
     "workbench.colorCustomizations": {
         "editor.background": "#1a1a1a",
@@ -17,8 +19,9 @@
         "editor.selectionBackground": "#343842",
         "editor.lineHighlightBackground": "#191C21"
     },
-    
+
     "editor.semanticHighlighting.enabled": true,
+
     "editor.semanticTokenColorCustomizations": {
         "enabled": true,
         "rules": {
@@ -52,7 +55,7 @@
             "comment": {
                 "foreground": "#777777",
                 "italic": false
-            }
+            },
         }
     },
 
@@ -88,7 +91,7 @@
                     "storage.type",
                     "storage.modifier",
                     "keyword.control",
-                    "keyword.other"
+                    "keyword.other",
                 ],
                 "settings": {
                     "foreground": "#F0A6CA"
@@ -107,7 +110,7 @@
                     "support.type.python"
                 ],
                 "settings": {
-                    "foreground": "#81D8D0"
+                    "foreground": "#7FDBCA"
                 }
             },
             {
@@ -115,7 +118,8 @@
                 "scope": [
                     "punctuation.definition.decorator.python",
                     "meta.function.decorator.python",
-                    "punctuation.definition.decorator.python"
+                    "punctuation.definition.decorator.python",
+                    "entity.name.function.decorator.python",
                 ],
                 "settings": {
                     "foreground": "#94bfff"
@@ -131,7 +135,32 @@
                 "settings": {
                     "foreground": "#c0a4fa"
                 }
+            },
+            {
+            "scope": "entity.name.type.namespace",
+            "settings": {
+                "foreground": "#C3A5FF"
             }
+        },
+        {
+            "name": "Class",
+            "scope": [
+                "entity.name.type.class",
+                "entity.other.inherited-class.python"
+            ],
+            "settings": {
+                "foreground": "#FCA875"
+            }
+        },
+        {
+            "name": "Class Attribute",
+            "scope": [
+                "variable.language.special.self.python"
+            ],
+            "settings": {
+                "foreground": "#ffb98e"
+            }
+        }
         ]
     }
 }
