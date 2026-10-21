@@ -55,7 +55,7 @@
             "comment": {
                 "foreground": "#777777",
                 "italic": false
-            },
+            }
         }
     },
 
@@ -69,7 +69,7 @@
                 ],
                 "settings": {
                     "foreground": "#777777",
-                    "fontStyle": "italic"
+                    "fontStyle": ""
                 }
             },
             {
@@ -91,7 +91,7 @@
                     "storage.type",
                     "storage.modifier",
                     "keyword.control",
-                    "keyword.other",
+                    "keyword.other"
                 ],
                 "settings": {
                     "foreground": "#F0A6CA"
@@ -119,7 +119,7 @@
                     "punctuation.definition.decorator.python",
                     "meta.function.decorator.python",
                     "punctuation.definition.decorator.python",
-                    "entity.name.function.decorator.python",
+                    "entity.name.function.decorator.python"
                 ],
                 "settings": {
                     "foreground": "#94bfff"
