@@ -1,0 +1,169 @@
+{
+    "workbench.colorCustomizations": {
+        "editor.background": "#1a1a1a",
+        "sideBar.background": "#1a1a1a",
+        "activityBar.background": "#1a1a1a",
+        "panel.background": "#1a1a1a",
+        "terminal.background": "#1a1a1a",
+        "titleBar.activeBackground": "#1a1a1a",
+        "statusBar.background": "#1a1a1a",
+
+        "editor.foreground": "#E6E6E6",
+        "editorLineNumber.foreground": "#555B66",
+        "editorLineNumber.activeForeground": "#C8A7F0",
+        "editorCursor.foreground": "#E6E6E6",
+        "editor.selectionBackground": "#343842",
+        "editor.lineHighlightBackground": "#191C21"
+    },
+
+    "editor.semanticHighlighting.enabled": true,
+
+    "editor.semanticTokenColorCustomizations": {
+        "enabled": true,
+        "rules": {
+            "namespace": "#c3a5ff",
+
+            "class.typeHint:python": "#98eae2",
+
+            "class": "#fca875",
+            "type": "#E5C07B",
+            "typeParameter": "#E5C07B",
+
+            "function": "#c3a5ff",
+            "member": "#c3a5ff",
+            "property": "#c3a5ff",
+
+            "parameter": "#fbdef3",
+            "selfParameter": "#ffb98e",
+            "clsParameter": "#fbdef3",
+
+            "variable": "#ffe5f8",
+            "variable.readonly": "#7aafff",
+
+            "*.decorator": "#94bfff",
+
+            "keyword": "#F0A6CA",
+            "operator": "#FAF9FA",
+
+            "number": "#F0A6CA",
+
+            "comment": {
+                "foreground": "#777777",
+                "italic": false
+            }
+        }
+    },
+
+    "editor.tokenColorCustomizations": {
+        "textMateRules": [
+            {
+                "name": "Comments",
+                "scope": [
+                    "comment",
+                    "punctuation.definition.comment"
+                ],
+                "settings": {
+                    "foreground": "#777777"
+                }
+            },
+            {
+                "name": "Strings",
+                "scope": [
+                    "string",
+                    "string.quoted.single",
+                    "string.quoted.double"
+                ],
+                "settings": {
+                    "foreground": "#c0d8ed"
+                }
+            },
+            {
+                "name": "Docstrings",
+                "scope": [
+                    "string",
+                    "string.quoted.docstring"
+                ],
+                "settings": {
+                    "foreground": "#a9d5fa"
+                }
+            },
+            {
+                "name": "Keywords",
+                "scope": [
+                    "keyword",
+                    "storage.type",
+                    "storage.modifier",
+                    "keyword.control",
+                    "keyword.other"
+                ],
+                "settings": {
+                    "foreground": "#F0A6CA"
+                }
+            },
+            {
+                "name": "Numbers",
+                "scope": "constant.numeric",
+                "settings": {
+                    "foreground": "#F0A6CA"
+                }
+            },
+            {
+                "name": "Builtins",
+                "scope": [
+                    "support.type.python"
+                ],
+                "settings": {
+                    "foreground": "#7FDBCA"
+                }
+            },
+            {
+                "name": "Decorator @",
+                "scope": [
+                    "punctuation.definition.decorator.python",
+                    "meta.function.decorator.python",
+                    "punctuation.definition.decorator.python",
+                    "entity.name.function.decorator.python"
+                ],
+                "settings": {
+                    "foreground": "#94bfff"
+                }
+            },
+            {
+                "name": "Function calls",
+                "scope": [
+                    "support.function.builtin",
+                    "meta.function-call.python",
+                    "entity.name.function.python"
+                ],
+                "settings": {
+                    "foreground": "#c0a4fa"
+                }
+            },
+            {
+            "scope": "entity.name.type.namespace",
+            "settings": {
+                "foreground": "#C3A5FF"
+            }
+        },
+        {
+            "name": "Class",
+            "scope": [
+                "entity.name.type.class",
+                "entity.other.inherited-class.python"
+            ],
+            "settings": {
+                "foreground": "#FCA875"
+            }
+        },
+        {
+            "name": "Class Attribute",
+            "scope": [
+                "variable.language.special.self.python"
+            ],
+            "settings": {
+                "foreground": "#ffb98e"
+            }
+        }
+        ]
+    }
+}
