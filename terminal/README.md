@@ -4,26 +4,11 @@ Terminal prompts can be customized using ANSI escape sequences to control text c
 
 
 ## Themes
-**config1**
-![config1](pics/config1.png)
-```bash
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-PS1='\[\e[38;5;183m\]${VIRTUAL_ENV:+(${VIRTUAL_ENV##*/})}\[\e[0m\]\[\e[38;5;211m\]\u\[\e[0m\]\[\e[38;5;211m\]@\[\e[0m\]\[\e[38;5;211m\]\h\[\e[0m\]\[\e[38;5;211m\]:\[\e[0m\]\[\e[38;5;141m\]\w\[\e[0m\]\[\e[38;5;141m\]\$\[\e[0m\] '
-```
 
-**config2**
-![config2](pics/config2.png)
-```bash
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-PS1='\[\e[38;5;218m\]${VIRTUAL_ENV:+(${VIRTUAL_ENV##*/})}\[\e[0m\]\[\e[38;5;141m\]\u\[\e[0m\]\[\e[38;5;141m\]@\[\e[0m\]\[\e[38;5;141m\]\h\[\e[0m\]\[\e[38;5;141m\]:\[\e[0m\]\[\e[38;5;211m\]\w\[\e[0m\]\[\e[38;5;211m\]\$\[\e[0m\] '
-```
+**[MI77 Terminal Studio](https://mirabelleding.github.io/MI77-Themes/terminal/studio/)**
 
-**config3**
-![config3](pics/config3.png)
-```bash
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-PS1='\[\e[38;5;211m\]${VIRTUAL_ENV:+(${VIRTUAL_ENV##*/})}\[\e[0m\]\[\e[38;5;141m\]\u\[\e[0m\]\[\e[38;5;141m\]@\[\e[0m\]\[\e[38;5;141m\]\h\[\e[0m\]\[\e[38;5;141m\]:\[\e[0m\]\[\e[38;5;218m\]\w\[\e[0m\]\[\e[38;5;218m\]\$\[\e[0m\] '
-```
+An interactive tool for configuring Bash prompts with customizable colors, live previews, and ready-to-use shell configurations.
+
 
 ## Applying the Configuration
 

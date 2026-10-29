@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11131a">
+  <title>MI77 Terminal Studio | MI77-Themes</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0e1016;
+      color: #edeef4;
+      font-synthesis: none;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: radial-gradient(ellipse 80% 42% at 15% -12%, #37264977, transparent), radial-gradient(ellipse 65% 48% at 100% 0%, #1f314354, transparent), #0e1016; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    button:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid #c7b3ff; outline-offset: 3px; }
+    a { color: #d0bbff; }
+    .shell { width: min(1200px, calc(100% - 48px)); margin: 0 auto; padding-bottom: 68px; }
+    .topbar { height: 78px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #ffffff12; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 750; letter-spacing: -.3px; }
+    .brand-mark { height: 32px; padding: 0 12px; white-space: nowrap; display: grid; place-items: center; border-radius: 9px; color: #17111f; background: linear-gradient(145deg, #e4c5f6, #ffaacb); font-size: 11px; font-weight: 900; letter-spacing: -.25px; }
+    .brand small { font-weight: 450; color: #a7a8ba; letter-spacing: 0; }
+    .nav-tag { color: #b8abc9; border: 1px solid #ffffff24; border-radius: 100px; padding: 7px 12px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+    .hero { padding: 52px 0 32px; }
+    .eyebrow { color: #cba5f1; text-transform: uppercase; font-size: 11px; font-weight: 750; letter-spacing: .21em; margin: 0 0 14px; }
+    h1 { letter-spacing: -.053em; line-height: 1.12; font-size: clamp(34px, 5vw, 59px); margin: 0; font-weight: 760; }
+    h1 span { background: linear-gradient(90deg,#cfa8ff,#ffaed6); color: transparent; background-clip: text; }
+    .subtitle { color: #a9a9ba; line-height: 1.65; max-width: 590px; margin-top: 17px; font-size: 15px; }
+    .layout { display: grid; grid-template-columns: minmax(0, 1.07fr) minmax(350px, .93fr); gap: 22px; align-items: start; }
+    .stack { display: grid; gap: 20px; min-width: 0; }
+    .panel { min-width: 0; background: #171922e8; border: 1px solid #ffffff19; border-radius: 17px; box-shadow: 0 12px 42px #0000001a; overflow: hidden; }
+    .panel-pad { padding: 24px; }
+    .panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 17px; }
+    h2 { font-size: 15px; margin: 0; letter-spacing: -.02em; font-weight: 670; }
+    .muted { font-size: 12px; color: #9696aa; }
+    .terminal-window { background: #0a0d12; border: 1px solid #ffffff1c; border-radius: 12px; overflow: hidden; }
+    .terminal-header { padding: 11px 15px; border-bottom: 1px solid #ffffff12; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #83899c; }
+    .window-dots { display: flex; gap: 6px; }
+    .window-dots i { width: 8px; height: 8px; border-radius: 100%; background: #505361; }
+    .window-dots i:nth-child(1) { background:#e17b82; } .window-dots i:nth-child(2) { background:#dec57c; } .window-dots i:nth-child(3) { background:#8bc29b; }
+    .terminal-content { padding: 22px 18px 40px; overflow-x: auto; min-height: 140px; }
+    #promptPreview { white-space: pre; width: max-content; color: #eaeaf0; font: 500 13px/1.6 "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+    .cursor { display: inline-block; background:#d9dce9; width: 7px; height: 15px; margin-left: 7px; vertical-align: -3px; animation: blink 1.3s step-end infinite; }
+    @keyframes blink { 50% { opacity: .12; } }
+    .preview-options { display: flex; align-items: center; justify-content: space-between; gap: 13px; flex-wrap: wrap; margin-top: 17px; }
+    .toggle-line { display: flex; align-items: center; gap: 9px; font-size: 12px; color: #c1c1cd; cursor: pointer; }
+    .toggle-line input { accent-color: #bb95ff; width: 16px; height: 16px; }
+    .hint { color:#9c9eb1; font-size:12px; line-height: 1.55; margin: 10px 0 0; }
+    .code-window { background:#0c0f15; border:1px solid #ffffff18; border-radius: 11px; max-height: 330px; overflow: auto; }
+    pre { margin: 0; padding: 17px; font: 12px/1.75 "SFMono-Regular", Consolas, "Liberation Mono", monospace; tab-size:2; color:#d4d5e3; white-space:pre; }
+    .actions { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; }
+    .button { display: inline-flex; justify-content:center; align-items:center; gap:8px; background: #262936; border: 1px solid #ffffff24; color:#e5e5ef; padding: 10px 13px; font-weight: 650; font-size: 12px; border-radius:9px; transition: background .12s,border-color .12s; }
+    .button:hover { background:#313545; border-color:#ffffff3c; }
+    .button.primary { color:#211525; background:linear-gradient(100deg,#d6b3fa,#ffb3d3); border-color:transparent; }
+    .button.primary:hover { filter:brightness(1.08); }
+    .button.subtle { background:transparent; }
+    .pill { background:#282337; border:1px solid #5e4870; color:#d7b8f4; font-size:11px; padding:5px 9px; border-radius:50px; }
+    .section-help { font-size: 12px; color: #9799aa; margin: -7px 0 17px; line-height: 1.5; }
+    .preset-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .preset { background: #1f212b; border: 1px solid #ffffff1e; padding: 12px; border-radius:11px; display:flex; flex-direction:column; gap:9px; text-align:left; color:#e6e5ed; font-size:12px; font-weight: 650; }
+    .preset:hover { border-color:#c5a6e5a0; }
+    .preset.active { background:#2d2339; border-color:#ba96ef; }
+    .dots { display:flex; gap:5px; }
+    .dots span { width: 13px; height:13px; border-radius:50%; border:1px solid #ffffff24; }
+    .segmented { background:#0f121a; border:1px solid #ffffff1a; border-radius:9px; padding:4px; display:inline-flex; gap:3px; }
+    .segmented button { background:transparent; color:#989ab0; border:0; padding:7px 13px; border-radius:6px; font-size:11px; font-weight:720; }
+    .segmented button.active { background:#363047; color:#f0e6fc; }
+    .color-rows { display:grid; gap:10px; }
+    .color-row { background:#1d2029; border:1px solid #ffffff10; border-radius:11px; padding:12px; display:grid; grid-template-columns:minmax(125px, 1fr) minmax(0, 1.1fr); align-items:center; gap:11px; }
+    .color-id { display:flex; gap:10px; align-items:center; min-width:0; }
+    .color-picker { height:35px; width:35px; min-width:35px; border:1px solid #ffffff55; border-radius:8px; padding:0; cursor:pointer; box-shadow:inset 0 0 0 1px #00000021; }
+    .color-picker:hover { outline:2px solid #d4b1fa88; outline-offset:2px; }
+    .picker-popover { position:fixed; z-index:200; width:min(330px,calc(100vw - 24px)); padding:14px; border:1px solid #ffffff35; border-radius:15px; background:#242630; box-shadow:0 18px 65px #000b; }
+    .picker-popover[hidden] { display:none; }
+    .picker-top { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; }
+    .picker-name { font-size:12px; font-weight:700; }
+    .picker-top .picker-close { border:0; background:#ffffff16; color:#dadbe4; border-radius:7px; width:27px; height:27px; font-size:18px; line-height:1; }
+    .picker-controls { display:flex; gap:11px; height:212px; }
+    .sv-area { position:relative; flex:1; min-width:0; border:1px solid #ffffff24; border-radius:7px; cursor:crosshair; touch-action:none; background-image:linear-gradient(to top,#000,transparent),linear-gradient(to right,#fff,transparent); }
+    .sv-handle { position:absolute; height:13px; width:13px; border:2px solid #fff; border-radius:50%; box-shadow:0 0 0 1px #0008,0 1px 5px #000b; transform:translate(-50%,-50%); pointer-events:none; }
+    .hue-area { position:relative; width:25px; flex-shrink:0; border:1px solid #ffffff25; border-radius:6px; cursor:ns-resize; touch-action:none; background:linear-gradient(to bottom,#f00 0%,#ff0 16.667%,#0f0 33.333%,#0ff 50%,#00f 66.667%,#f0f 83.333%,#f00 100%); }
+    .hue-handle { position:absolute; left:-3px; width:calc(100% + 6px); height:8px; border:2px solid #fff; border-radius:3px; box-shadow:0 0 0 1px #0008; transform:translateY(-50%); pointer-events:none; }
+    .picker-bottom { display:flex; align-items:center; gap:9px; margin:13px 0 10px; }
+    .picker-current { width:34px; height:34px; border:1px solid #ffffff4d; border-radius:7px; flex-shrink:0; }
+    .picker-hex { flex:1; width:100%; background:#10131a; border:1px solid #ffffff30; border-radius:7px; padding:8px 10px; font:12px "SFMono-Regular",Consolas,monospace; color:#f3f0f7; text-transform:uppercase; }
+    .picker-rgb { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px; }
+    .picker-rgb label { display:grid; gap:4px; color:#989bad; font-size:10px; }
+    .picker-rgb input { min-width:0; width:100%; background:#10131a; border:1px solid #ffffff30; border-radius:6px; padding:7px 6px; color:#f3f0f7; font:12px "SFMono-Regular",Consolas,monospace; }
+    .picker-help { font-size:10px; margin:10px 0 0; color:#9496a9; line-height:1.4; }
+    .color-label { display:flex; flex-direction:column; gap:3px; font-size:12px; font-weight: 640; }
+    .color-label small { color:#84889d; font-weight:450; font-size:10px; font-family: "SFMono-Regular", Consolas, monospace; }
+    .color-edit { min-width:0; }
+    .hex-field, .rgb-field, .small-input, .select-input { width:100%; background:#10131a; color:#ececf2; border:1px solid #ffffff25; border-radius:7px; padding:9px 10px; font-size:12px; }
+    .hex-field { font-family: "SFMono-Regular", Consolas, monospace; text-transform:uppercase; letter-spacing:.02em; }
+    .rgb-fields { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:5px; }
+    .rgb-wrap { min-width:0; position:relative; }
+    .rgb-field { padding:16px 5px 5px; text-align:center; font-size:12px; appearance:textfield; -moz-appearance:textfield; }
+    .rgb-field::-webkit-inner-spin-button, .rgb-field::-webkit-outer-spin-button { -webkit-appearance:none; margin:0; }
+    .rgb-wrap small { position:absolute; top:3px; left:8px; color:#999bb0; font-size:9px; }
+    .settings { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .field { display:grid; gap:7px; min-width:0; }
+    .field label { color:#adafc0; font-size:11px; font-weight:650; }
+    .settings-footer { padding-top:13px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .foot { margin-top:29px; border-top:1px solid #ffffff15; padding-top:18px; color:#85899b; font-size:12px; line-height:1.6; text-align:center; }
+    .foot code { color:#cab6dd; }
+    .status { color:#bca5de; font-size:12px; min-height:17px; }
+    .install-steps { display: grid; gap: 14px; margin-top: 18px; }
+    .install-step { display: grid; gap: 8px; }
+    .install-label { font-size: 12px; font-weight: 650; color: #c5c4d2; }
+    .install-toggle { width: 100%; }
+    .install-toggle button { flex: 1; padding: 10px 13px; }
+    .install-steps .hint { margin: 0; }
+    @media (max-width:940px) { .layout { grid-template-columns:1fr; } .shell { width:min(720px,calc(100% - 30px)); } .hero { padding-top:38px; } }
+    @media (max-width:480px) { .panel-pad { padding:16px; } .color-row { grid-template-columns:1fr; gap:9px; } .settings { grid-template-columns:1fr; } .topbar { height:68px; } .nav-tag { display:none; } }
+    @media (prefers-reduced-motion:reduce) { .cursor { animation:none; } }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">MI77-LAB</div><div>Terminal Studio <small>/ MI77-Themes</small></div></div>
+      <span class="nav-tag">Bash · True Color</span>
+    </header>
+    <section class="hero">
+      <p class="eyebrow">Bash / Colour Studio</p>
+      <h1>Your terminal.<br><span>Your colors.</span></h1>
+      <p class="subtitle">Customize Bash prompt components in HEX or RGB, preview color combinations and generate ready-to-use Bash configurations.</p>
+    </section>
+    <main class="layout">
+      <div class="stack">
+        <section class="panel panel-pad">
+          <div class="panel-heading"><h2>Live preview</h2><span class="pill">Bash</span></div>
+          <div class="terminal-window">
+            <div class="terminal-header"><div class="window-dots"><i></i><i></i><i></i></div><span>Terminal — prompt preview</span></div>
+            <div class="terminal-content"><div id="promptPreview" aria-live="polite"></div></div>
+          </div>
+          <div class="preview-options"><label class="toggle-line"><input type="checkbox" id="activeVenv" checked> Simulate active .venv</label><span class="muted">Preview only</span></div>
+        </section>
+        <section class="panel panel-pad">
+          <div class="panel-heading"><h2>Bash Configuration</h2><span class="pill">24-bit RGB</span></div>
+          <div class="code-window"><pre id="output" aria-live="polite"></pre></div>
+          <div class="actions" style="margin-top:15px">
+            <button type="button" id="copy" class="button primary">Copy configuration</button>
+            <button type="button" id="download" class="button">Download .sh</button>
+          </div>
+          <div id="status" class="status" role="status" style="margin-top:12px"></div>
+        </section>
+        <section class="panel panel-pad">
+          <div class="panel-heading"><h2>Apply Configuration</h2></div>
+          <div class="segmented install-toggle" role="group" aria-label="Bash environment">
+            <button type="button" id="macOSMode" class="active" aria-pressed="true">macOS</button>
+            <button type="button" id="linuxMode" aria-pressed="false">Linux / WSL</button>
+          </div>
+          <div class="install-steps">
+            <div class="install-step">
+              <span class="install-label">Open the shell initialization file</span>
+              <div class="code-window"><pre id="editCommand">nano ~/.bash_profile</pre></div>
+            </div>
+            <p class="hint">Add the generated configuration to the shell initialization file. Place it after any existing prompt definitions to avoid having it overwritten.</p>
+            <div class="install-step">
+              <span class="install-label">Reload the configuration file</span>
+              <div class="code-window"><pre id="reloadCommand">source ~/.bash_profile</pre></div>
+            </div>
+            <p class="hint">If a virtual environment is already active, deactivate and reactivate it after applying the changes.</p>
+          </div>
+        </section>
+      </div>
+      <div class="stack">
+        <section class="panel panel-pad">
+          <div class="panel-heading"><h2>Preset Palettes</h2><span class="muted">Themes</span></div>
+          <div id="presets" class="preset-grid"></div>
+        </section>
+        <section class="panel panel-pad">
+          <div class="panel-heading"><h2>Prompt Settings</h2></div>
+          <div class="settings">
+            <div class="field"><label for="pathMode">Directory display</label><select class="select-input" id="pathMode"><option value="full">Full path</option><option value="short">Directory name only</option></select></div>
+            <div class="field"><label for="venvMode">Python virtual environment</label><select class="select-input" id="venvMode"><option value="yes">Show when active</option><option value="no">Hide</option></select></div>
+            <div class="field"><label for="previewUser">Preview username</label><input id="previewUser" class="small-input" value="username" maxlength="36" spellcheck="false"></div>
+            <div class="field"><label for="previewHost">Preview hostname</label><input id="previewHost" class="small-input" value="hostname" maxlength="36" spellcheck="false"></div>
+            <div class="field"><label for="previewPath">Preview working directory</label><input id="previewPath" class="small-input" value="~/projects/repository" maxlength="90" spellcheck="false"></div>
+            <div class="field"><label for="previewVenv">Preview environment name</label><input id="previewVenv" class="small-input" value=".venv" maxlength="36" spellcheck="false"></div>
+          </div>
+          <p class="hint">Preview inputs don't affect the generated configuration. Bash resolves the real values with <code>\u</code>, <code>\h</code>, and <code>\w</code>.</p>
+          <div class="settings-footer"><button type="button" id="reset" class="button subtle">Reset to default</button></div>
+        </section>
+        <section class="panel panel-pad">
+          <div class="panel-heading"><h2>Customize Individual Colours</h2><div class="segmented" role="group" aria-label="Colour input format"><button type="button" id="hexMode" class="active" aria-pressed="true">HEX</button><button type="button" id="rgbMode" aria-pressed="false">RGB</button></div></div>
+          <p class="section-help">Select a colour swatch to adjust its shade, or enter HEX or RGB values directly.</p>
+          <div class="color-rows" id="colorRows"></div>
+        </section>
+      </div>
+    </main>
+    <footer class="foot">mirabelleding@MI77-LAB</footer>
+  </div>
+  <div id="pickerPanel" class="picker-popover" role="dialog" aria-label="Color picker" hidden>
+    <div class="picker-top"><span id="pickerName" class="picker-name">Color picker</span><button id="pickerClose" class="picker-close" type="button" aria-label="Close color picker">×</button></div>
+    <div class="picker-controls">
+      <div id="svArea" class="sv-area" role="group" tabindex="0" aria-label="Saturation and brightness. Use left and right arrows for saturation and up and down arrows for brightness."><span id="svHandle" class="sv-handle"></span></div>
+      <div id="hueArea" class="hue-area" role="slider" tabindex="0" aria-label="Hue" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="360" aria-valuenow="0"><span id="hueHandle" class="hue-handle"></span></div>
+    </div>
+    <div class="picker-bottom"><span id="pickerCurrent" class="picker-current"></span><input id="pickerHex" class="picker-hex" aria-label="HEX color" maxlength="7" spellcheck="false"></div>
+    <div class="picker-rgb"><label>Red<input id="pickerR" type="number" min="0" max="255" aria-label="Red channel"></label><label>Green<input id="pickerG" type="number" min="0" max="255" aria-label="Green channel"></label><label>Blue<input id="pickerB" type="number" min="0" max="255" aria-label="Blue channel"></label></div>
+    <p class="picker-help">Drag in the square to adjust saturation and brightness. Drag the rainbow slider to change hue.</p>
+  </div>
+  <script>
+    const segments = [
+      {key:'venv', label:'Virtual environment',symbol:'(.venv)'},
+      {key:'user',label:'Username',symbol:'\\u'},
+      {key:'at',label:'At sign',symbol:'@'},
+      {key:'host',label:'Hostname',symbol:'\\h'},
+      {key:'colon',label:'Colon',symbol:':'},
+      {key:'path',label:'Working directory',symbol:'\\w'},
+      {key:'dollar',label:'Prompt symbol',symbol:'\\$'}
+    ];
+    const presets = [
+      {name:'Lavender & Rose',hex:['#D7AFFF','#FF87AF','#FF87AF','#FF87AF','#FF87AF','#AF87FF','#AF87FF']},
+      {name:'Pastel Pink',hex:['#FFAFD7','#AF87FF','#AF87FF','#AF87FF','#AF87FF','#FF87AF','#FF87AF']},
+      {name:'Blush',hex:['#FF87AF','#AF87FF','#AF87FF','#AF87FF','#AF87FF','#FFAFD7','#FFAFD7']},
+      {name:'Ocean',hex:['#87D7FF','#5FD7D7','#5FD7D7','#5FAFFF','#5FAFFF','#AE8DF1','#AE8DF1']},
+      {name:'Classic Linux',hex:['#BCBCBC','#87D787','#87D787','#87D787','#EEEEEE','#5FAFFF','#EEEEEE']},
+      {name:'Golden Hour',hex:['#FFD700','#FF8700','#FF8700','#FFAFAF','#FFAFAF','#FF9E3E','#FF9E3E']}
+    ];
+    const initial = Object.fromEntries(segments.map((s,i)=>[s.key,presets[0].hex[i]]));
+    const state = {colors:{...initial},mode:'hex',preset:'Lavender & Rose'};
+    const el = id => document.getElementById(id);
+    const normalizeHex = raw => {
+      let v = String(raw).trim().replace(/^#/,'');
+      if (/^[0-9a-f]{3}$/i.test(v)) v=v.split('').map(ch=>ch+ch).join('');
+      return /^[0-9a-f]{6}$/i.test(v) ? '#'+v.toUpperCase() : null;
+    };
+    const toRgb = hex => [1,3,5].map(i=>parseInt(hex.slice(i,i+2),16));
+    const fromRgb = rgb => '#'+rgb.map(v=>Math.min(255,Math.max(0,Number(v)||0)).toString(16).padStart(2,'0')).join('').toUpperCase();
+    const escapeHtml = text => String(text).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const ansi = (key,content) => {
+      const [r,g,b]=toRgb(state.colors[key]);
+      return `\\[\\e[38;2;${r};${g};${b}m\\]${content}\\[\\e[0m\\]`;
+    };
+    const generate = () => {
+      const parts=['export VIRTUAL_ENV_DISABLE_PROMPT=1'];
+      if(el('venvMode').value==='yes') parts.push(`PS1='${ansi('venv','${VIRTUAL_ENV:+(${VIRTUAL_ENV##*/})}')}'`);
+      else parts.push("PS1=''");
+      parts.push(`PS1+='${ansi('user','\\u')}'`);
+      parts.push(`PS1+='${ansi('at','@')}'`);
+      parts.push(`PS1+='${ansi('host','\\h')}'`);
+      parts.push(`PS1+='${ansi('colon',':')}'`);
+      parts.push(`PS1+='${ansi('path',el('pathMode').value==='full'?'\\w':'\\W')}'`);
+      parts.push(`PS1+='${ansi('dollar','\\$')} '`);
+      return parts.join('\n');
+    };
+    const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
+    const rgbToHsv=([r,g,b])=>{
+      r/=255;g/=255;b/=255;
+      const max=Math.max(r,g,b),min=Math.min(r,g,b),d=max-min;
+      let h=0;
+      if(d!==0){
+        if(max===r) h=((g-b)/d)%6;
+        else if(max===g) h=(b-r)/d+2;
+        else h=(r-g)/d+4;
+        h=(h*60+360)%360;
+      }
+      return [h,max===0?0:d/max,max];
+    };
+    const hsvToRgb=(h,s,v)=>{
+      const c=v*s,x=c*(1-Math.abs((h/60)%2-1)),m=v-c;
+      let rgb;
+      if(h<60) rgb=[c,x,0];
+      else if(h<120) rgb=[x,c,0];
+      else if(h<180) rgb=[0,c,x];
+      else if(h<240) rgb=[0,x,c];
+      else if(h<300) rgb=[x,0,c];
+      else rgb=[c,0,x];
+      return rgb.map(n=>Math.round((n+m)*255));
+    };
+    const picker={key:null,h:0,s:0,v:0};
+    const renderPresets=()=>{
+      el('presets').innerHTML=presets.map(p=>`<button type="button" class="preset${state.preset===p.name?' active':''}" data-preset="${escapeHtml(p.name)}" aria-pressed="${state.preset===p.name}"><span>${escapeHtml(p.name)}</span><span class="dots">${[p.hex[0],p.hex[1],p.hex[3],p.hex[5]].map(c=>`<span style="background:${c}"></span>`).join('')}</span></button>`).join('');
+      el('presets').querySelectorAll('[data-preset]').forEach(button=>button.addEventListener('click',()=>{
+        const p=presets.find(p=>p.name===button.dataset.preset);
+        closePicker();
+        state.colors=Object.fromEntries(segments.map((s,i)=>[s.key,p.hex[i]]));
+        state.preset=p.name;
+        renderPresets();renderColors();renderOutput();
+      }));
+    };
+    const syncColorInputs=(key,force=false)=>{
+      const root=el('colorRows');
+      const swatch=root.querySelector(`[data-picker="${key}"]`);
+      if(swatch) swatch.style.backgroundColor=state.colors[key];
+      const hex=root.querySelector(`[data-input="${key}"]`);
+      if(hex&&(force||hex!==document.activeElement)) hex.value=state.colors[key];
+      root.querySelectorAll(`[data-rgb="${key}"]`).forEach(input=>{
+        if(force||input!==document.activeElement) input.value=toRgb(state.colors[key])[Number(input.dataset.channel)];
+      });
+    };
+    const setColor=(key,hex,updateHsv=true)=>{
+      state.colors[key]=hex;
+      state.preset='';
+      renderPresets();
+      syncColorInputs(key,!updateHsv);
+      renderOutput();
+      if(picker.key===key){
+        if(updateHsv){
+          const [h,s,v]=rgbToHsv(toRgb(hex));
+          if(s>0) picker.h=h;
+          picker.s=s;picker.v=v;
+        }
+        updatePicker(!updateHsv);
+      }
+    };
+    const renderColors=()=>{
+      el('colorRows').innerHTML=segments.map(s=>{
+        const rgb=toRgb(state.colors[s.key]);
+        const entry=state.mode==='hex' ? `<input class="hex-field" data-input="${s.key}" aria-label="${s.label} hex color" value="${state.colors[s.key]}" maxlength="7" spellcheck="false">` : `<div class="rgb-fields">${rgb.map((n,i)=>`<div class="rgb-wrap"><small>${['R','G','B'][i]}</small><input class="rgb-field" type="number" min="0" max="255" step="1" data-rgb="${s.key}" data-channel="${i}" aria-label="${s.label} ${['red','green','blue'][i]}" value="${n}"></div>`).join('')}</div>`;
+        return `<div class="color-row"><div class="color-id"><button type="button" class="color-picker" data-picker="${s.key}" aria-label="Open ${s.label} gradient picker" aria-haspopup="dialog" style="background-color:${state.colors[s.key]}"></button><span class="color-label">${s.label}<small>${escapeHtml(s.symbol)}</small></span></div><div class="color-edit">${entry}</div></div>`;
+      }).join('');
+      el('colorRows').querySelectorAll('[data-picker]').forEach(button=>button.addEventListener('click',()=>{
+        if(picker.key===button.dataset.picker) closePicker();
+        else openPicker(button.dataset.picker,button);
+      }));
+      el('colorRows').querySelectorAll('[data-input]').forEach(input=>{
+        input.addEventListener('input',()=>{
+          const hex=normalizeHex(input.value);
+          if(hex) setColor(input.dataset.input,hex);
+        });
+        input.addEventListener('blur',()=>{input.value=state.colors[input.dataset.input];});
+      });
+      el('colorRows').querySelectorAll('[data-rgb]').forEach(input=>{
+        input.addEventListener('input',()=>{
+          if(input.value.trim()==='') return;
+          const key=input.dataset.rgb;
+          const rgb=toRgb(state.colors[key]);
+          rgb[Number(input.dataset.channel)]=clamp(Math.round(Number(input.value)||0),0,255);
+          setColor(key,fromRgb(rgb));
+        });
+        input.addEventListener('blur',()=>{input.value=toRgb(state.colors[input.dataset.rgb])[Number(input.dataset.channel)];});
+      });
+    };
+    const updatePicker=(force=false)=>{
+      if(!picker.key) return;
+      el('svArea').style.backgroundColor=`hsl(${picker.h} 100% 50%)`;
+      el('svHandle').style.left=`${picker.s*100}%`;
+      el('svHandle').style.top=`${(1-picker.v)*100}%`;
+      el('hueHandle').style.top=`${picker.h/360*100}%`;
+      el('hueArea').setAttribute('aria-valuenow',String(Math.round(picker.h)));
+      const hex=state.colors[picker.key];
+      el('pickerCurrent').style.backgroundColor=hex;
+      if(force||document.activeElement!==el('pickerHex')) el('pickerHex').value=hex;
+      toRgb(hex).forEach((n,i)=>{
+        const input=el(['pickerR','pickerG','pickerB'][i]);
+        if(force||document.activeElement!==input) input.value=n;
+      });
+    };
+    const positionPicker=()=>{
+      if(!picker.key) return;
+      const anchor=el('colorRows').querySelector(`[data-picker="${picker.key}"]`);
+      if(!anchor) return;
+      const box=el('pickerPanel'),r=anchor.getBoundingClientRect();
+      const left=clamp(r.left,12,Math.max(12,window.innerWidth-box.offsetWidth-12));
+      const below=r.bottom+10,above=r.top-box.offsetHeight-10;
+      const top=below+box.offsetHeight+12<=window.innerHeight?below:above>=12?above:clamp(r.top,12,Math.max(12,window.innerHeight-box.offsetHeight-12));
+      box.style.left=`${left}px`;box.style.top=`${top}px`;
+    };
+    const openPicker=(key,button)=>{
+      picker.key=key;
+      const [h,s,v]=rgbToHsv(toRgb(state.colors[key]));
+      picker.h=h;picker.s=s;picker.v=v;
+      el('pickerName').textContent=segments.find(s=>s.key===key).label;
+      el('pickerPanel').hidden=false;
+      updatePicker();positionPicker();
+      el('pickerHex').setAttribute('aria-label',`${el('pickerName').textContent} HEX color`);
+    };
+    const closePicker=()=>{picker.key=null;el('pickerPanel').hidden=true;};
+    const applyPicker=()=>setColor(picker.key,fromRgb(hsvToRgb(picker.h,picker.s,picker.v)),false);
+    const bindGradient=(element,kind)=>{
+      const adjust=event=>{
+        if(!picker.key) return;
+        const rect=element.getBoundingClientRect();
+        if(kind==='sv'){
+          picker.s=clamp((event.clientX-rect.left)/rect.width,0,1);
+          picker.v=1-clamp((event.clientY-rect.top)/rect.height,0,1);
+        }else picker.h=clamp((event.clientY-rect.top)/rect.height,0,1)*359.999;
+        applyPicker();
+      };
+      element.addEventListener('pointerdown',event=>{
+        if(event.button!==0&&event.pointerType==='mouse') return;
+        event.preventDefault();element.setPointerCapture(event.pointerId);adjust(event);
+      });
+      element.addEventListener('pointermove',event=>{
+        if(element.hasPointerCapture(event.pointerId)) adjust(event);
+      });
+      element.addEventListener('keydown',event=>{
+        const delta=event.shiftKey?0.1:0.01;
+        if(kind==='sv'){
+          if(event.key==='ArrowLeft') picker.s=clamp(picker.s-delta,0,1);
+          else if(event.key==='ArrowRight') picker.s=clamp(picker.s+delta,0,1);
+          else if(event.key==='ArrowUp') picker.v=clamp(picker.v+delta,0,1);
+          else if(event.key==='ArrowDown') picker.v=clamp(picker.v-delta,0,1);
+          else return;
+        }else{
+          const step=event.shiftKey?10:1;
+          if(event.key==='ArrowUp') picker.h=(picker.h-step+360)%360;
+          else if(event.key==='ArrowDown') picker.h=(picker.h+step)%360;
+          else if(event.key==='Home') picker.h=0;
+          else if(event.key==='End') picker.h=359;
+          else return;
+        }
+        event.preventDefault();applyPicker();
+      });
+    };
+    bindGradient(el('svArea'),'sv');
+    bindGradient(el('hueArea'),'hue');
+    el('pickerClose').addEventListener('click',closePicker);
+    document.addEventListener('pointerdown',event=>{
+      if(picker.key&&!el('pickerPanel').contains(event.target)&&!event.target.closest('[data-picker]')) closePicker();
+    });
+    document.addEventListener('keydown',event=>{
+      if(event.key==='Escape'&&picker.key){closePicker();event.preventDefault();}
+    });
+    window.addEventListener('resize',positionPicker);
+    window.addEventListener('scroll',positionPicker,true);
+    el('pickerHex').addEventListener('input',event=>{
+      const hex=normalizeHex(event.target.value);
+      if(hex&&picker.key) setColor(picker.key,hex);
+    });
+    el('pickerHex').addEventListener('blur',()=>{if(picker.key) el('pickerHex').value=state.colors[picker.key];});
+    ['pickerR','pickerG','pickerB'].forEach((id,i)=>{
+      const input=el(id);
+      input.addEventListener('input',()=>{
+        if(!picker.key||input.value.trim()==='') return;
+        const rgb=toRgb(state.colors[picker.key]);
+        rgb[i]=clamp(Math.round(Number(input.value)||0),0,255);
+        setColor(picker.key,fromRgb(rgb));
+      });
+      input.addEventListener('blur',()=>{if(picker.key) input.value=toRgb(state.colors[picker.key])[i];});
+    });
+    const span=(key,value)=>`<span style="color:${state.colors[key]}">${escapeHtml(value)}</span>`;
+    const renderOutput=()=>{
+      const path=el('previewPath').value||'~';
+      const basename=path.replace(/\/+$/,'').split('/').pop()||'~';
+      let html='';
+      if(el('venvMode').value==='yes'&&el('activeVenv').checked) html+=span('venv',`(${el('previewVenv').value||'.venv'})`);
+      html+=span('user',el('previewUser').value||'username');
+      html+=span('at','@');
+      html+=span('host',el('previewHost').value||'hostname');
+      html+=span('colon',':');
+      html+=span('path',el('pathMode').value==='full'?path:basename);
+      html+=span('dollar','$');
+      el('promptPreview').innerHTML=html+' <span class="cursor" aria-hidden="true"></span>';
+      el('output').textContent=generate();
+    };
+    const setMode=mode=>{
+      closePicker();
+      state.mode=mode;
+      el('hexMode').classList.toggle('active',mode==='hex');
+      el('rgbMode').classList.toggle('active',mode==='rgb');
+      el('hexMode').setAttribute('aria-pressed',mode==='hex');
+      el('rgbMode').setAttribute('aria-pressed',mode==='rgb');
+      renderColors();
+    };
+    const setInstallMode=mode=>{
+      const linux=mode==='linux';
+      el('macOSMode').classList.toggle('active',!linux);
+      el('linuxMode').classList.toggle('active',linux);
+      el('macOSMode').setAttribute('aria-pressed',String(!linux));
+      el('linuxMode').setAttribute('aria-pressed',String(linux));
+      const file=linux?'~/.bashrc':'~/.bash_profile';
+      el('editCommand').textContent=`nano ${file}`;
+      el('reloadCommand').textContent=`source ${file}`;
+    };
+    el('macOSMode').addEventListener('click',()=>setInstallMode('macos'));
+    el('linuxMode').addEventListener('click',()=>setInstallMode('linux'));
+    el('hexMode').addEventListener('click',()=>setMode('hex'));
+    el('rgbMode').addEventListener('click',()=>setMode('rgb'));
+    ['pathMode','venvMode','previewUser','previewHost','previewPath','previewVenv','activeVenv'].forEach(id=>el(id).addEventListener('input',renderOutput));
+    el('reset').addEventListener('click',()=>{
+      closePicker();
+      state.colors={...initial};state.preset=presets[0].name;
+      el('pathMode').value='full';el('venvMode').value='yes';el('previewUser').value='username';el('previewHost').value='hostname';el('previewPath').value='~/projects/repository';el('previewVenv').value='.venv';el('activeVenv').checked=true;
+      setMode('hex');renderPresets();renderOutput();
+    });
+    const feedback=message=>{el('status').textContent=message;};
+    el('copy').addEventListener('click',async()=>{
+      const data=generate();
+      try {
+        await navigator.clipboard.writeText(data);
+        feedback('Configuration copied to clipboard.');
+      } catch {
+        const text=document.createElement('textarea');text.value=data;text.style.position='fixed';text.style.opacity='0';document.body.append(text);text.select();
+        const copied=document.execCommand('copy');text.remove();
+        feedback(copied?'Configuration copied to clipboard.':'Copy is unavailable here. Select the code above manually.');
+      }
+    });
+    el('download').addEventListener('click',()=>{
+      const blob=new Blob([generate()+'\n'],{type:'text/x-shellscript'});
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');a.href=url;a.download='mi77-prompt.sh';document.body.append(a);a.click();a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),500);
+      feedback('Downloaded mi77-prompt.sh.');
+    });
+    renderPresets();renderColors();renderOutput();
+  </script>
+</body>
+</html>
